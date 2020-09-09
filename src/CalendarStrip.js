@@ -134,7 +134,8 @@ class CalendarStrip extends Component {
       dayComponentWidth: 0,
       height: 0,
       monthFontSize: 0,
-      selectorSize: 0
+      selectorSize: 0,
+      numVisibleDays: this.props.numDaysInWeek
     };
 
     this.animations = [];
@@ -153,6 +154,11 @@ class CalendarStrip extends Component {
       days = this.createDays(startingDate.startingDate);
     }
 
+    if(prevProps.markedDates !== this.props.markedDates){
+      updateState = true;
+      days = this.createDays(this.state.startingDate);
+    }
+    
     if (updateState) {
       this.setState({...startingDate, ...days });
     }
